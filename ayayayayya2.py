@@ -3,7 +3,8 @@ import numpy as np
 
 # Load the "bert-base-uncased" tokenizer and model for NER
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
-model = BertForTokenClassification.from_pretrained("dbmdz/bert-large-cased-finetuned-conll03-english", num_labels=3)
+model = BertForTokenClassification.from_pretrained("dbmdz/bert-large-cased-finetuned-conll03-english", num_labels=3, ignore_mismatched_sizes=True)
+
 
 # Define NER labels for "diagnosis" and "treatment"
 labels = ["O", "B-DIAGNOSIS", "B-TREATMENT"]
@@ -92,4 +93,4 @@ for data in struct:
         f"{data['gender']} who visited the hospital on {data['visitdate']}. "
         f"He was diagnosed with {data['diagnosis']}. The treatment recommended by the doctor is {data['treatment']}."
     )
-    print(template)
+    print(f"Templatized sentence 1: {template}")
